@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker News Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+
+        /* Constrain width of text and feature content */
+        header>*,
+        .section h2,
+        .project h3,
+        .project p,
+        .feature-image,
+        .project>a,
+        .back-link {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        /* Ensure left alignment for text inside the centered block if needed, 
+           inherit is usually fine but let's be safe */
+        .project p,
+        .project h3 {
+            text-align: left;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .project {
+            margin-bottom: 30px;
+        }
+
+        .project:last-child {
+            margin-bottom: 0;
+        }
+
+        .project h3 {
+            color: #2980b9;
+            margin-bottom: 8px;
+        }
+
+        .project p {
+            color: #555;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        .project a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .project a:hover {
+            text-decoration: underline;
+        }
+
+        .feature-image {
+            margin: 20px auto;
+            /* auto margin for centering */
+            width: 100%;
+        }
+
+        .feature-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .feature-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            z-index: 1;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .back-link:hover {
+            color: #2c3e50;
+        }
+
+        .status-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
+
+        <header>
+            <h1>Now In Hacker News</h1>
+            <p class="subtitle">A mobile app for Hacker News imitating the UI/UX of Now In Android</p>
+        </header>
+
+
+
+        <div class="section">
+
+            <div class="project">
+                <h3>
+                    Android App
+                    <span class="status-tag">No longer active</span>
+                </h3>
+                <p>
+                    I created a YouTube series analyzing the open source code of 'Now In Android'. Following that,
+                    I built 'Now In Hacker News', a mobile app for Hacker News that imitates the modern UI/UX
+                    of the Google sample app.
+                </p>
+
+                <div class="feature-image">
+                    <img src="images/hackernews (2).png" alt="App Feature Graphic">
+                </div>
+
+                <div class="gallery">
+                    <img src="images/homepage.webp" alt="App Homepage">
+                    <img src="images/comments.webp" alt="Comments View">
+                    <img src="images/saved.webp" alt="Saved Stories">
+                    <img src="images/settings.webp" alt="Settings Screen">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
