@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .project {
+            margin-bottom: 30px;
+        }
+
+        .project:last-child {
+            margin-bottom: 0;
+        }
+
+        .project h3 {
+            color: #2980b9;
+            margin-bottom: 8px;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-planning {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .project p {
+            color: #555;
+            margin-top: 8px;
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        .links a {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Matthew Tong</h1>
+            <p class="subtitle">Projects, Ideas, Progress</p>
+        </header>
+
+        <div class="section">
+            <h2>Currently Building</h2>
+
+            <div class="project">
+                <h3>
+                    AI Powered Calorie Tracking.
+                    <span class="project-status status-active">Active</span>
+                </h3>
+                <p>
+                    Building an AI-driven calorie tracking application, that uses gemini to determine the caloric value
+                    of food items.
+                </p>
+                <p><strong>Tech: Node.js, Next.js, Google Firebase, Google Genkit (AI), Stripe, Tailwind CSS</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Planning</h2>
+
+            <div class="project">
+                <h3>
+                    Marvel Rivals VOD Review tool
+                    <span class="project-status status-planning">Planning</span>
+                </h3>
+                <p>
+                    Building an AI-driven calorie tracking application, that uses gemini to determine the caloric value
+                    of food items.
+                </p>
+                <p><strong>Tech: Node.js, Next.js, Google Firebase, Google Genkit (AI), Stripe, Tailwind CSS</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="section links">
+            <h2>Connect</h2>
+            <a href="https://github.com/matthewtong2018" target="_blank">GitHub</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
