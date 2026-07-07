@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyblade: Web Battle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="beyblade_v4.css">
+  </head>
+  <body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <a href="index.html" class="back-link">&larr; Back to Blog</a>
+      <div class="brand-font" style="font-size: 1.25rem; font-weight: bold; letter-spacing: 2px;">BEYBLADE : WEB BATTLE</div>
+      <div style="width: 100px;"></div>
+    </nav>
+
+    <div id="app">
+      <!-- MAIN MENU -->
+      <section id="main-menu" class="screen active">
+        <div class="text-center">
+          <h1 class="hero-title">BEYBLADE</h1>
+          <div class="hero-subtitle">Web Battle</div>
+          <button id="btn-start" class="btn btn-primary mt-4" style="font-size: 1.25rem; padding: 1rem 3rem;">Start Journey</button>
+        </div>
+      </section>
+
+      <!-- GARAGE SCREEN -->
+      <section id="garage-screen" class="screen">
+        <header class="garage-header">
+          <h2 class="brand-font" style="font-size: 2rem;">The Garage</h2>
+          <button id="btn-garage-back" class="btn btn-secondary">Main Menu</button>
+        </header>
+        <div class="garage-layout">
+          <!-- Stats Panel -->
+          <div class="stats-card">
+            <h3>Current Stats</h3>
+            <div class="stat-item">
+              <div class="stat-header"><span>Attack</span><span id="val-attack">0</span></div>
+              <div class="stat-bar-bg"><div class="stat-bar-fill" id="stat-attack"></div></div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-header"><span>Defense</span><span id="val-defense">0</span></div>
+              <div class="stat-bar-bg"><div class="stat-bar-fill" id="stat-defense"></div></div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-header"><span>Stamina</span><span id="val-stamina">0</span></div>
+              <div class="stat-bar-bg"><div class="stat-bar-fill" id="stat-stamina"></div></div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-header"><span>Weight</span><span id="val-weight">0</span></div>
+              <div class="stat-bar-bg"><div class="stat-bar-fill" id="stat-weight"></div></div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-header"><span>Speed</span><span id="val-speed">0</span></div>
+              <div class="stat-bar-bg"><div class="stat-bar-fill" id="stat-speed"></div></div>
+            </div>
+            <button id="btn-to-levels" class="btn btn-primary mt-4 w-100">Select Opponent &rarr;</button>
+          </div>
+          
+          <!-- Parts Selection -->
+          <div class="parts-container">
+            <div class="part-category">
+              <h3>Attack Ring (Top)</h3>
+              <div class="part-list" id="list-top"></div>
+            </div>
+            <div class="part-category">
+              <h3>Weight Disk (Middle)</h3>
+              <div class="part-list" id="list-middle"></div>
+            </div>
+            <div class="part-category">
+              <h3>Performance Tip (Bottom)</h3>
+              <div class="part-list" id="list-bottom"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEVEL SELECT SCREEN -->
+      <section id="level-select-screen" class="screen">
+        <header class="garage-header">
+          <h2 class="brand-font" style="font-size: 2rem;">Select Opponent</h2>
+          <button id="btn-levels-back" class="btn btn-secondary">Back to Garage</button>
+        </header>
+        <div id="level-list" class="level-grid"></div>
+      </section>
+
+      <!-- BATTLE SCREEN -->
+      <section id="battle-screen" class="screen">
+        <div class="battle-header">
+          <div class="fighter-hud">
+            <div class="fighter-name" style="color: var(--accent-blue);">Player</div>
+            <div class="hud-stamina-bg"><div id="player-stamina" class="hud-stamina-fill"></div></div>
+          </div>
+          <div class="brand-font" style="font-size: 2rem; color: rgba(255,255,255,0.2);">VS</div>
+          <div class="fighter-hud right">
+            <div class="fighter-name" id="enemy-name" style="color: var(--accent-red);">Opponent</div>
+            <div class="hud-stamina-bg"><div id="enemy-stamina" class="hud-stamina-fill"></div></div>
+          </div>
+        </div>
+        
+        <canvas id="battle-canvas"></canvas>
+
+        <!-- LAUNCH MECHANIC OVERLAY -->
+        <div id="launch-overlay" class="overlay">
+          <div class="launch-box">
+            <h2>Prepare to Launch!</h2>
+            <p>Hit Spacebar in the Green Zone for MAX POWER!</p>
+            <div id="launch-bar-wrapper" class="launch-bar-container">
+              <div class="launch-zone-good"></div>
+              <div class="launch-zone-perfect"></div>
+              <div id="launch-cursor" class="launch-cursor"></div>
+            </div>
+            <div id="launch-status" class="launch-feedback">READY...</div>
+          </div>
+        </div>
+
+        <!-- RESULT OVERLAY -->
+        <div id="result-overlay" class="overlay hidden">
+          <div class="result-box" id="result-box-el">
+            <h2 id="battle-result-title" class="brand-font">Victory!</h2>
+            <p id="battle-result-desc" style="color: var(--text-muted); font-size: 1.25rem;">You knocked them out!</p>
+            <button id="btn-battle-leave" class="btn btn-primary mt-4">Continue</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="beyblade_v4.js"></script>
+  </body>
+</html>
