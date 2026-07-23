@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odyssey Hex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <a href="../index.html" id="back-btn">Back to Portfolio</a>
+        <div id="hud">
+            <div class="hud-top">
+                <div class="stat-box">
+                    <span class="label">TURN</span>
+                    <span id="turn-val" class="value">1</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">WIND</span>
+                    <div id="compass-container">
+                        <div id="compass-arrow"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hud-bottom">
+                <div class="bar-container">
+                    <div class="bar-header">
+                        <span>STAMINA</span>
+                        <span id="stamina-text">150/150</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div id="stamina-bar" class="bar-fill stamina"></div>
+                    </div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-header">
+                        <span>SHIP HEALTH</span>
+                        <span id="health-text">100/100</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div id="health-bar" class="bar-fill health"></div>
+                    </div>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-header">
+                        <span>CREW</span>
+                        <span id="crew-text">50/50</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div id="crew-bar" class="bar-fill crew"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="legend">
+            <h3>LEGEND</h3>
+            <div class="legend-item"><div class="swatch swatch-ocean"></div>Ocean</div>
+            <div class="legend-item"><div class="swatch swatch-ship"></div>Trireme (You)</div>
+            <div class="legend-item"><div class="swatch swatch-goal"></div>Ithaca (Goal)</div>
+            <div class="legend-item"><div class="swatch swatch-island"></div>Isle (Scavenge)</div>
+            <div class="legend-item"><div class="swatch swatch-bigisland"></div>Landmass</div>
+            <div class="legend-item"><div class="swatch swatch-cliff"></div>Rocky Cliffs</div>
+            <div class="legend-item"><div class="swatch swatch-whirlpool"></div>Charybdis (Damage)</div>
+            <div class="legend-item"><div class="swatch swatch-monster"></div>Scylla (Eats Crew)</div>
+        </div>
+        <div id="overlay" class="hidden">
+            <div id="overlay-content">
+                <h1 id="overlay-title"></h1>
+                <p id="overlay-desc"></p>
+                <button id="restart-btn">NEW VOYAGE</button>
+            </div>
+        </div>
+        <div id="event-toast" class="hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
