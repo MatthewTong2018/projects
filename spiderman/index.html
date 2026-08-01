@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Spider-Man: Brand New Day - Web Slinger | 2D Physics Platformer</title>
+  <meta name="description" content="Experience dynamic pendulum web physics, predictive trajectory arcs, and procedural endless city swinging in Spider-Man: Brand New Day Web Slinger.">
+  <meta property="og:title" content="Spider-Man: Brand New Day - Web Slinger">
+  <meta property="og:description" content="Swing through a vibrant cyberpunk NYC skyline with real-time pendulum rope physics and spider-sense trajectory prediction.">
+  <meta property="og:type" content="website">
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app-container">
+    <h1 class="sr-only">Spider-Man: Brand New Day - 2D Web Slinger Game</h1>
+    
+    <!-- Game Canvas -->
+    <div id="canvas-wrapper">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- HUD Overlay (Visible during gameplay) -->
+    <header id="hud-overlay" class="hud hidden" aria-label="Game HUD">
+      <!-- Left Stats: Score & Photos -->
+      <div class="hud-left">
+        <div class="hud-stat-box" id="score-box">
+          <span class="stat-label">DISTANCE</span>
+          <div class="stat-value-group">
+            <span id="stat-distance">0</span><span class="stat-unit">m</span>
+          </div>
+        </div>
+        <div class="hud-stat-box photo-stat hidden" id="photo-stat-box">
+          <span class="stat-label">BUGLE PHOTOS</span>
+          <div class="stat-value-group">
+            <span id="stat-photos">0</span>
+            <span class="photo-icon">📷</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center: Combo & Mode Badge -->
+      <div class="hud-center">
+        <div id="mode-badge" class="mode-badge">ENDLESS RUSH</div>
+        <div id="combo-display" class="combo-display">
+          <span id="combo-multiplier">x1.0</span>
+          <span class="combo-label">COMBO</span>
+          <div class="combo-meter">
+            <div id="combo-bar" class="combo-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Speedometer & Action Buttons -->
+      <div class="hud-right">
+        <div class="hud-stat-box speed-box" id="speed-box">
+          <span class="stat-label">SPEED</span>
+          <div class="stat-value-group">
+            <span id="stat-speed">0</span><span class="stat-unit">km/h</span>
+          </div>
+          <div id="speed-indicator" class="speed-indicator">
+            <div id="speed-fill" class="speed-fill"></div>
+          </div>
+        </div>
+        <div class="hud-stat-box max-speed-box" id="max-speed-box">
+          <span class="stat-label">MAX SPEED</span>
+          <div class="stat-value-group">
+            <span id="stat-max-speed">0</span><span class="stat-unit">km/h</span>
+          </div>
+        </div>
+        <div class="hud-controls">
+          <a href="../index.html" class="btn-icon" title="Back to Portfolio" aria-label="Back to Portfolio" style="text-decoration: none; width: auto; padding: 0 10px; font-size: 11px; font-weight: 900;">
+            ← PORTFOLIO
+          </a>
+          <button id="btn-toggle-sound" class="btn-icon" title="Toggle Sound (M)" aria-label="Toggle Sound">
+            <span id="sound-icon">🔇</span>
+          </button>
+          <button id="btn-pause" class="btn-icon" title="Pause Game (P)" aria-label="Pause Game">
+            <span>⏸</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Spider-Sense Flash Indicator -->
+    <div id="spider-sense-overlay" class="spider-sense-overlay"></div>
+
+    <!-- MODALS CONTAINER -->
+    <div id="modal-backdrop" class="modal-backdrop">
+      
+      <!-- 1. TITLE / MAIN MENU MODAL -->
+      <section id="modal-title" class="glass-modal active" aria-labelledby="title-heading">
+        <div class="modal-header">
+          <span class="badge-sub">THE DAILY BUGLE ISSUE</span>
+          <h2 id="title-heading" class="title-logo">
+            <span class="spidey-red">SPIDER-MAN</span><br>
+            <span class="spidey-blue">BRAND NEW DAY</span>
+          </h2>
+          <p class="subtitle">WEB-SLINGING 2D PLATFORMER</p>
+        </div>
+
+        <div class="modal-content">
+          <!-- Game Mode Selector -->
+          <div class="mode-selector" role="radiogroup" aria-label="Select Game Mode">
+            <button class="mode-card active" data-mode="endless" aria-checked="true">
+              <div class="mode-icon">🕸️</div>
+              <div class="mode-info">
+                <h3>Endless Rush</h3>
+                <p>Swing across the city as far as you can without falling.</p>
+              </div>
+            </button>
+            <button class="mode-card" data-mode="photo" aria-checked="false">
+              <div class="mode-icon">📸</div>
+              <div class="mode-info">
+                <h3>Daily Bugle Challenge</h3>
+                <p>Collect photo tokens for the Daily Bugle before time runs out.</p>
+              </div>
+            </button>
+          </div>
+
+          <!-- High Score Bar -->
+          <div class="highscore-bar">
+            <div class="hs-item">
+              <span class="hs-label">BEST DISTANCE:</span>
+              <span id="hs-distance" class="hs-val">0 m</span>
+            </div>
+            <div class="hs-item">
+              <span class="hs-label">BEST BUGLE SCORE:</span>
+              <span id="hs-photo" class="hs-val">0</span>
+            </div>
+          </div>
+
+          <!-- How to Play Quick Summary -->
+          <div class="controls-guide">
+            <div class="ctrl-item">
+              <kbd>SPACE / CLICK</kbd>
+              <span>Shoot / Release Web</span>
+            </div>
+            <div class="ctrl-item">
+              <kbd>A / D</kbd>
+              <span>Swing Left / Right</span>
+            </div>
+            <div class="ctrl-item">
+              <kbd>W / S</kbd>
+              <span>Climb Up / Down</span>
+            </div>
+            <div class="ctrl-item">
+              <kbd>SHIFT</kbd>
+              <span>Zip Boost</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btn-start-game" class="btn-primary glow-red">
+            <span>WEB SLING (PLAY)</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <a href="../index.html" class="btn-secondary" style="text-align: center; text-decoration: none; display: block; padding: 10px; font-weight: 900; border: 2px solid #000; box-shadow: 2px 2px 0px #000; color: #000; background: #fff; font-size: 13px;">
+            ← BACK TO PORTFOLIO
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. PAUSE MENU MODAL -->
+      <section id="modal-pause" class="glass-modal hidden" aria-labelledby="pause-heading">
+        <h2 id="pause-heading" class="modal-title">GAME PAUSED</h2>
+        <p class="modal-subtext">Take a breath, web-slinger.</p>
+
+        <div class="modal-buttons-stack">
+          <button id="btn-resume" class="btn-primary">RESUME SWINGING (P)</button>
+          <button id="btn-restart-pause" class="btn-secondary">RESTART LEVEL (R)</button>
+          <button id="btn-toggle-trajectory" class="btn-toggle">
+            <span>Trajectory Predictor Arc</span>
+            <span id="status-trajectory" class="toggle-status on">ON</span>
+          </button>
+          <button id="btn-toggle-audio-menu" class="btn-toggle">
+            <span>Synth Audio &amp; SFX</span>
+            <span id="status-audio" class="toggle-status off">OFF</span>
+          </button>
+          <button id="btn-quit-menu" class="btn-danger">RETURN TO TITLE</button>
+          <a href="../index.html" class="btn-secondary" style="text-align: center; text-decoration: none; display: block; padding: 10px; font-weight: 900; border: 2px solid #000; color: #000; background: #fff; font-size: 13px;">
+            ← BACK TO PORTFOLIO
+          </a>
+        </div>
+      </section>
+
+      <!-- 3. GAME OVER MODAL -->
+      <section id="modal-gameover" class="glass-modal hidden" aria-labelledby="gameover-heading">
+        <div class="gameover-banner">
+          <span id="gameover-tag" class="tag-alert">WEB SNAP</span>
+          <h2 id="gameover-heading" class="title-gameover">RUN FINISHED</h2>
+        </div>
+
+        <div class="gameover-stats-grid">
+          <div class="stat-card">
+            <span class="stat-card-label">DISTANCE SWUNG</span>
+            <span id="go-distance" class="stat-card-value">0 m</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card-label">MAX SPEED</span>
+            <span id="go-speed" class="stat-card-value">0 km/h</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card-label">BEST COMBO</span>
+            <span id="go-combo" class="stat-card-value">x1.0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card-label">BUGLE PHOTOS</span>
+            <span id="go-photos" class="stat-card-value">0</span>
+          </div>
+        </div>
+
+        <div id="new-highscore-badge" class="highscore-badge hidden">
+          <span>🏆 NEW HIGH SCORE RECORD! 🏆</span>
+        </div>
+
+        <div class="modal-footer row">
+          <button id="btn-restart-go" class="btn-primary glow-red">
+            <span>SWING AGAIN (SPACE / R)</span>
+          </button>
+          <button id="btn-menu-go" class="btn-secondary">
+            <span>MENU</span>
+          </button>
+          <a href="../index.html" class="btn-secondary" style="text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 10px 16px; font-weight: 900; border: 2px solid #000; box-shadow: 2px 2px 0px #000; color: #000; background: #fff; font-size: 13px;">
+            ← PORTFOLIO
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Footer Quick Control Bar -->
+    <footer class="game-footer">
+      <span><kbd>Space</kbd> or <kbd>Left Click</kbd> Web Anchor &bull; <kbd>A</kbd>/<kbd>D</kbd> Swing Torque &bull; <kbd>W</kbd>/<kbd>S</kbd> Rope Length &bull; <kbd>P</kbd> Pause</span>
+    </footer>
+  </main>
+
+  <!-- Modular Game Engine Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/physics.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
